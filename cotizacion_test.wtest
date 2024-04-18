@@ -1,0 +1,26 @@
+import cotizacion.*
+
+test "la cotizacion de la calidad buena es 3" {
+    assert.equals(3, calidadBuena.cotizacion()   )
+}
+
+test "la cotizacion de la calidad premium es 50% mayor a la buena" {
+   const cotizacionPremiumEsperada = 1.5 * calidadBuena.cotizacion()
+   assert.equals(cotizacionPremiumEsperada, calidadPremium.cotizacion()) 
+}
+
+test "si PEPE dice que la cotizacion es 1, la papa regular vale 1" {
+    // seteo la cotizacion dada por PEPE en 1
+    pepe.cotizacion(1)
+
+    assert.equals( pepe.cotizacion(), calidadRegular.cotizacion() )
+}
+
+test "el productor puede cotizar correctamente el costo de produccion" {
+    productor.calidad(calidadBuena)
+    assert.equals(productor.costoProduccion(10), 30)
+    productor.calidad(calidadPremium)
+    assert.equals(productor.costoProduccion(10), 45)
+    productor.calidad(calidadRegular)
+    assert.equals(productor.costoProduccion(10), 20)
+}
